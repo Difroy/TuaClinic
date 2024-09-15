@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.generation.clinic.model.entities.Intervention;
 import com.generation.clinic.model.entities.Patient;
 import com.generation.clinic.model.entities.Sex;
 
@@ -24,7 +25,7 @@ public class PatientRepositorySQL implements PatientRepository {
 	public void insert(Patient patient) {
 
 		try {
-			String row = "INSERT into patient (insurence, name, surname, dateOfBirth, sex, interventionId) values (?,?,?,?,?,?)";
+			String row = "INSERT into patient (insurance, name, surname, dateOfBirth, sex, interventionId) values (?,?,?,?,?,?)";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
 
 			preparazioneSQL.setInt(1, patient.getInsurence());
@@ -59,7 +60,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setSurname(returnDalDB.getString("surname"));
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
-			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInsurence(returnDalDB.getInt("insurance"));
 			patient.setInterventionId(returnDalDB.getInt("insurenceId"));
 
 			return patient;
@@ -86,7 +87,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setSurname(returnDalDB.getString("surname"));
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
-			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInsurence(returnDalDB.getInt("insurance"));
 			patient.setInterventionId(returnDalDB.getInt("insurenceId"));
 			
 			
@@ -100,18 +101,18 @@ public class PatientRepositorySQL implements PatientRepository {
 	
 	
 	@Override
-	public List<Patient> findByNameIntervention(String nameIntervention) {
+	public List<Patient> findByNameIntervention(Intervention intervention) {
 	
 		
 
 		try {
 
-			String row = "select * from patient join intervention where patient.interventionid = intervention.id and intervention.name = ?";
+			String row = "select * from patient join intervention where patient.interventionId = intervention.id and intervention.nameIntervent = ?";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
 			
 			
 			
-			preparazioneSQL.setString(1, nameIntervention);
+			preparazioneSQL.setString(1, intervention.getNameIntervent());
 
 			ResultSet returnDalDB = preparazioneSQL.executeQuery();
 			List<Patient> patients = new ArrayList<>();
@@ -123,7 +124,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setSurname(returnDalDB.getString("surname"));
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
-			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInsurence(returnDalDB.getInt("insurance"));
 			patient.setInterventionId(returnDalDB.getInt("interventionId"));
 			
 			
@@ -164,7 +165,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setSurname(returnDalDB.getString("surname"));
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
-			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInsurence(returnDalDB.getInt("insurance"));
 			patient.setInterventionId(returnDalDB.getInt("interventionId"));
 			
 			
@@ -186,7 +187,7 @@ public class PatientRepositorySQL implements PatientRepository {
 	public void update(Patient patient) {
 
 		try {
-			String row = "UPDATE patient SET insurence = ?, name = ?, surname = ?, dateOfBirth = ?, interventionId = ? WHERE id=?";
+			String row = "UPDATE patient SET insurance = ?, name = ?, surname = ?, dateOfBirth = ?, interventionId = ? WHERE id=?";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
 
 			preparazioneSQL.setInt(1, patient.getInsurence());

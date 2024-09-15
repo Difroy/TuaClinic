@@ -48,6 +48,17 @@ public class Intervention {
 		return patients;
 	}
 	
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+	@Override
+	public String toString() {
+		return "Intervention [id=" + id + ", cost=" + cost + ", nameIntervent=" + nameIntervent + ", doctor=" + doctor
+				+ ", patients=" + patients + "]";
+	}
+	
+	
+	
 	
 	
 	

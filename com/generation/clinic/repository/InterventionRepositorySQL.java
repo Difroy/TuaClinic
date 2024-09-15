@@ -12,6 +12,7 @@ import com.generation.clinic.model.entities.Intervention;
 public class InterventionRepositorySQL implements InterventionRepository{
 	
 	Connection connection;
+	PatientRepositorySQL patientRepo = PatientRepositoryFactory.make();
 	
 	public InterventionRepositorySQL() {
 		connection = ConnectionFactory.make();
@@ -58,6 +59,7 @@ public class InterventionRepositorySQL implements InterventionRepository{
 									   rs.getString("doctor"));
 				
 				//Ricercare lista dei pazienti con PatientRepositorySQL
+				i.setPatients(patientRepo.findByNameIntervention(i));
 				
 				res.add(i);
 			}
@@ -92,6 +94,7 @@ public class InterventionRepositorySQL implements InterventionRepository{
 									   rs.getString("doctor"));
 			
 				//Ricercare lista dei pazienti con PatientRepositorySQL
+				res.setPatients(patientRepo.findByNameIntervention(res));
 			}
 			
 			return res;

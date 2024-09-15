@@ -39,7 +39,7 @@ public class Patient {
 
 	public void setInterventionId(int interventionId) {
 		
-		this.interventionId = intervention.id;
+		this.interventionId = interventionId;
 	}
 
 
@@ -108,6 +108,15 @@ public class Patient {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", insurence=" + insurence + ", interventionId=" + interventionId + ", name="
+				+ name + ", surname=" + surname + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", intervention="
+				+ intervention + "]";
+	}
+	
+	
 	
 	
 	

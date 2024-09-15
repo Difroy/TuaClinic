@@ -6,7 +6,7 @@ public class InterventionRepositoryFactory
 	
 	public static InterventionRepositorySQL make()
 	{
-		if(intervrepo != null)
+		if(intervrepo == null)
 		{
 			intervrepo = new InterventionRepositorySQL();
 		}
