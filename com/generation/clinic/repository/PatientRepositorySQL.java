@@ -220,7 +220,5 @@ public class PatientRepositorySQL implements PatientRepository {
 			throw new RuntimeException(e.getMessage());
 
 		}
-
 	}
-
 }
