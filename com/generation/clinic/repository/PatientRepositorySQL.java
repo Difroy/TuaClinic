@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.generation.clinic.model.entities.Patient;
 import com.generation.clinic.model.entities.Sex;
@@ -22,7 +24,7 @@ public class PatientRepositorySQL implements PatientRepository {
 	public void insert(Patient patient) {
 
 		try {
-			String row = "INSERT into patient (insurence, name, surname, dateOfBirth, sex) values (?,?,?,?,?)";
+			String row = "INSERT into patient (insurence, name, surname, dateOfBirth, sex, interventionId) values (?,?,?,?,?,?)";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
 
 			preparazioneSQL.setInt(1, patient.getInsurence());
@@ -30,6 +32,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			preparazioneSQL.setString(3, patient.getSurname());
 			preparazioneSQL.setString(4, patient.getDateOfBirth());
 			preparazioneSQL.setString(5, String.valueOf(patient.getSex()));
+			preparazioneSQL.setInt(6,patient.getInterventionId());
 			preparazioneSQL.execute();
 
 		} catch (SQLException e) {
@@ -57,6 +60,7 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
 			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInterventionId(returnDalDB.getInt("insurenceId"));
 
 			return patient;
 		} catch (SQLException e) {
@@ -83,6 +87,9 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
 			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInterventionId(returnDalDB.getInt("insurenceId"));
+			
+			
 
 			return patient;
 		} catch (SQLException e) {
@@ -90,19 +97,26 @@ public class PatientRepositorySQL implements PatientRepository {
 		}
 	}
 
+	
+	
 	@Override
-	public Patient findByNameIntervention(String nameIntevention) {
+	public List<Patient> findByNameIntervention(String nameIntervention) {
 	
 		
 
 		try {
 
-			String row = "Select * from patient where surname = ?";
+			String row = "select * from patient join intervention where patient.interventionid = intervention.id and intervention.name = ?";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
-			preparazioneSQL.setString(1, surname);
+			
+			
+			
+			preparazioneSQL.setString(1, nameIntervention);
 
 			ResultSet returnDalDB = preparazioneSQL.executeQuery();
-
+			List<Patient> patients = new ArrayList<>();
+			while (returnDalDB.next()){
+				
 			Patient patient = new Patient();
 
 			patient.setName(returnDalDB.getString("name"));
@@ -110,33 +124,78 @@ public class PatientRepositorySQL implements PatientRepository {
 			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
 			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
 			patient.setInsurence(returnDalDB.getInt("insurence"));
-
-			return patient;
+			patient.setInterventionId(returnDalDB.getInt("interventionId"));
+			
+			
+			patients.add(patient);
+			
+			}
+			return patients;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage());
 		}
+		
+		
 	}
 		
 	
 
 	@Override
-	public Patient findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Patient> findAll() {
+	
+
+		try {
+
+			String row = "select * from patient";
+			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
+			
+			
+			
+			
+
+			ResultSet returnDalDB = preparazioneSQL.executeQuery();
+			List<Patient> patients = new ArrayList<>();
+			while (returnDalDB.next()){
+				
+			Patient patient = new Patient();
+
+			patient.setName(returnDalDB.getString("name"));
+			patient.setSurname(returnDalDB.getString("surname"));
+			patient.setDateOfBirth(returnDalDB.getString("dateOfBirth"));
+			patient.setSex(Sex.valueOf(returnDalDB.getString("sex")));
+			patient.setInsurence(returnDalDB.getInt("insurence"));
+			patient.setInterventionId(returnDalDB.getInt("interventionId"));
+			
+			
+			patients.add(patient);
+			
+			}
+			return patients;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		
+		
+		
+		
 	}
 
 	@Override
 	public void update(Patient patient) {
 
 		try {
-			String row = "UPDATE patient SET insurence = ?, name = ?, surname = ?, dateOfBirth = ? WHERE id=?";
+			String row = "UPDATE patient SET insurence = ?, name = ?, surname = ?, dateOfBirth = ?, interventionId = ? WHERE id=?";
 			PreparedStatement preparazioneSQL = connection.prepareStatement(row);
 
 			preparazioneSQL.setInt(1, patient.getInsurence());
 			preparazioneSQL.setString(2, patient.getName());
 			preparazioneSQL.setString(3, patient.getSurname());
 			preparazioneSQL.setString(4, patient.getDateOfBirth());
-			preparazioneSQL.setInt(5, patient.getId());
+			preparazioneSQL.setInt(5,patient.getInterventionId());
+			preparazioneSQL.setInt(6, patient.getId());
+			
 			preparazioneSQL.execute();
 
 		} catch (SQLException e) {

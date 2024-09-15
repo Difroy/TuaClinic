@@ -5,7 +5,6 @@ public class Patient {
 	protected int id, insurence, interventionId;
 	protected String name, surname, dateOfBirth;
 	protected Sex sex;
-	
 	Intervention intervention;
 	
 	
