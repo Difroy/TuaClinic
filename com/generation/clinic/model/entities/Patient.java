@@ -5,6 +5,12 @@ public class Patient {
 	protected int id, insurence;
 	protected String name, surname, dateOfBirth;
 	
+	
+	
+	
+	
+	
+	
 	public Patient (int id, int insurence, String name, String surname,String dateOfBirth) {
 		
 		this.id = id;
