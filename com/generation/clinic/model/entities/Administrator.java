@@ -13,6 +13,8 @@ public class Administrator {
 		this.password = password;
 		
 	}
+	
+	public Administrator() {};
 
 	public int getId() {
 		return id;
