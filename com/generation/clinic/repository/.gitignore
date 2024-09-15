@@ -3,3 +3,6 @@
 /ConnectionFactory.class
 /PatientRepository.class
 /AdministratorFactory.class
+/InterventionRepository.class
+/InterventionRepositorySQL.class
+/InterventionRepositoryFactory.class

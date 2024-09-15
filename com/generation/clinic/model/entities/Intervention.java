@@ -7,19 +7,16 @@ public class Intervention {
 
 	protected int id, cost;
 	protected String nameIntervent, doctor;
-	Patient patient;
 	List<Patient>patients = new ArrayList<>();
 	
 
 	
-	public Intervention(int id, int cost, String nameIntervent, String doctor, Patient patient, List<Patient> patients) {
+	public Intervention(int id, int cost, String nameIntervent, String doctor) {
 		super();
 		this.id = id;
 		this.cost = cost;
 		this.nameIntervent = nameIntervent;
 		this.doctor = doctor;
-		this.patient = patient;
-		this.patients = patients;
 		
 	}
 	public int getId() {
@@ -46,18 +43,10 @@ public class Intervention {
 	public void setDoctor(String doctor) {
 		this.doctor = doctor;
 	}
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+	
 	public List<Patient> getPatients() {
 		return patients;
 	}
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	} 
 	
 	
 	

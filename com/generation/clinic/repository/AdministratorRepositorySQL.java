@@ -9,20 +9,24 @@ import com.generation.clinic.model.entities.Administrator;
 
 public class AdministratorRepositorySQL implements AdministratorRepository 
 {
-	Connection connection = ConnectionFactory.make();
+	Connection connection;
+	
+	public AdministratorRepositorySQL()
+	{
+		this.connection = ConnectionFactory.make();
+	}
 	
 
 	@Override
 	public void insert(Administrator newAdministrator) 
 	{
-		String sql = "insert into administrator (id, email, password) values (?, ?, ?)";
+		String sql = "insert into administrator (email, password) values (?, ?)";
 		
 		try 
 		{
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, newAdministrator.getId());
-			ps.setString(2, newAdministrator.getEmail());
-			ps.setString(3, newAdministrator.getPassword());
+			ps.setString(1, newAdministrator.getEmail());
+			ps.setString(2, newAdministrator.getPassword());
 			
 			ps.execute();
 		} 
