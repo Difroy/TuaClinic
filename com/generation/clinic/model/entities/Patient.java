@@ -18,6 +18,7 @@ public class Patient {
 	public Patient (int id, int insurence, String name, String surname,String dateOfBirth, Sex sex, int interventionId) {
 		
 		this.id = id;
+		//tabella Edu è "insurance" darà problemi ma sticazzi
 		this.insurence = insurence;
 		this.name = name;
 		this.surname = surname;
