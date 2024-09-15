@@ -2,8 +2,11 @@ package com.generation.clinic.model.entities;
 
 public class Patient {
 
-	protected int id, insurence;
+	protected int id, insurence, interventionId;
 	protected String name, surname, dateOfBirth;
+	protected Sex sex;
+	
+	Intervention intervention;
 	
 	
 	
@@ -11,17 +14,60 @@ public class Patient {
 	
 	
 	
-	public Patient (int id, int insurence, String name, String surname,String dateOfBirth) {
+	
+	public Patient (int id, int insurence, String name, String surname,String dateOfBirth, Sex sex, int interventionId) {
 		
 		this.id = id;
 		this.insurence = insurence;
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
+		this.sex = sex;
+		this.interventionId = interventionId;
+		
 		
 	}
 	
+	public int getInterventionId() {
+		
+	
+		
+		return interventionId;
+	}
+
+
+
+	public void setInterventionId(int interventionId) {
+		
+		this.interventionId = intervention.id;
+	}
+
+
+
+
+	public Intervention getIntervention() {
+		return intervention;
+	}
+
+
+	public void setIntervention(Intervention intervention) {
+		this.intervention = intervention;
+	}
+
+
+
+
 	public Patient() {};
+
+	
+	
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
 
 	public int getId() {
 		return id;
