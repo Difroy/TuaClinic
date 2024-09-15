@@ -20,6 +20,8 @@ public class Patient {
 		this.dateOfBirth = dateOfBirth;
 		
 	}
+	
+	public Patient() {};
 
 	public int getId() {
 		return id;
